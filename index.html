@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>LearnUp</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="header">
+  <h1>LearnUp</h1>
+  <button class="logout" onclick="irLogin()">Entrar</button>
+</div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div style="text-align:center; margin-top:60px;">
+    <h2 style="font-size:32px; margin-bottom:15px;">
+      Aprenda. Participe. Evolua.
+    </h2>
+
+    <p style="opacity:0.8; max-width:600px; margin:auto;">
+      O LearnUp é uma plataforma interativa onde alunos podem participar de votações
+      educacionais e a gestão pode criar enquetes de forma simples e rápida.
+    </p>
+
+    <button class="btn-primary" style="max-width:250px;" onclick="irLogin()">
+      Começar Agora
+    </button>
+  </div>
+
+  <!-- FEATURES -->
+  <ul style="margin-top:60px;">
+    <li>
+      <b>Para Alunos</b><br>
+      Participe de votações em tempo real e veja os resultados instantaneamente.
+    </li>
+
+    <li>
+      <b>Para Gestão</b><br>
+      Crie votações personalizadas, acompanhe resultados e tome decisões melhores.
+    </li>
+
+    <li>
+      <b>Simples e Rápido</b><br>
+      Interface moderna, fácil de usar e acessível em qualquer dispositivo.
+    </li>
+  </ul>
+
+</div>
+
+<script>
+function irLogin() {
+  window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
