@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container" style="max-width:400px; margin-top:80px;">
+
+  <h1>Login</h1>
+
+  <input type="text" id="usuario" placeholder="Usuário">
+  <input type="password" id="senha" placeholder="Senha">
+
+  <button class="btn-primary" onclick="login()">Entrar</button>
+
+  <p id="erro" style="margin-top:10px; color:#ff4b2b;"></p>
+
+</div>
+
+<script>
+function login() {
+  const usuario = document.getElementById('usuario').value;
+  const senha = document.getElementById('senha').value;
+
+  if(usuario === "aluno" && senha === "aluno") {
+    localStorage.setItem("usuario", "aluno");
+    window.location.href = "aluno.html";
+  }
+  else if(usuario === "gestao" && senha === "gestao") {
+    localStorage.setItem("usuario", "gestao");
+    window.location.href = "gestao.html";
+  }
+  else {
+    document.getElementById('erro').innerText = "Usuário ou senha inválidos!";
+  }
+}
+</script>
+
+</body>
+</html>

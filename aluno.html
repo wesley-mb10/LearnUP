@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Aluno - Votações</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>Votações Disponíveis</h1>
+  <button class="logout" onclick="logout()">Sair</button>
+</div>
+
+<div class="container">
+  <ul id="listaVotacoes">
+    <li>Carregando votações...</li>
+  </ul>
+</div>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDZssXDFKXN0g48vAG_uYDT1qQiAvZeejc",
+  authDomain: "learnup-cc.firebaseapp.com",
+  databaseURL: "https://learnup-cc-default-rtdb.firebaseio.com",
+  projectId: "learnup-cc",
+  storageBucket: "learnup-cc.appspot.com",
+  messagingSenderId: "562099376652",
+  appId: "1:562099376652:web:6b5a96b92843f619485429"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// LISTAR VOTAÇÕES
+db.ref('votacoes').on('value', snapshot => {
+  const votacoes = snapshot.val();
+  const lista = document.getElementById('listaVotacoes');
+  lista.innerHTML = '';
+
+  if(votacoes){
+    Object.keys(votacoes).forEach(key => {
+      const vot = votacoes[key];
+      const li = document.createElement('li');
+
+      li.innerHTML = `<b>${vot.nome}</b><br>${vot.descricao}<br>`;
+
+      Object.keys(vot.opcoes).forEach(optKey => {
+        const opt = vot.opcoes[optKey];
+
+        const btn = document.createElement('button');
+        btn.textContent = `${opt.nome} (${opt.votos})`;
+
+        btn.onclick = () => {
+          db.ref(`votacoes/${key}/opcoes/${optKey}/votos`)
+            .transaction(v => (v || 0) + 1);
+        };
+
+        li.appendChild(btn);
+      });
+
+      lista.appendChild(li);
+    });
+  } else {
+    lista.innerHTML = '<li>Nenhuma votação disponível</li>';
+  }
+});
+
+// LOGOUT
+function logout() {
+  localStorage.removeItem("usuario");
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
